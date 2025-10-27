@@ -5,16 +5,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Icon from '@/components/ui/icon';
 
 const stations = [
-  { id: 1, name: 'Екатеринбург-Пассажирский', angle: 0, distance: 42 },
-  { id: 2, name: 'Шарташ', angle: 36, distance: 38 },
-  { id: 3, name: 'Керамик', angle: 72, distance: 42 },
-  { id: 4, name: 'Первомайская', angle: 108, distance: 38 },
-  { id: 5, name: 'Медный', angle: 144, distance: 42 },
-  { id: 6, name: 'Калиновская', angle: 180, distance: 38 },
-  { id: 7, name: 'Уралмаш', angle: 216, distance: 42 },
-  { id: 8, name: 'Химмаш', angle: 252, distance: 38 },
-  { id: 9, name: 'Елизавет', angle: 288, distance: 42 },
-  { id: 10, name: 'Компрессорный', angle: 324, distance: 38 }
+  { id: 1, name: 'Екатеринбург-Пассажирский', angle: 0, distance: 42, image: 'https://cdn.poehali.dev/projects/558d902a-9ea9-4b4a-bb10-b9d122cf9d26/files/52b3c68e-4c05-49a4-87fb-c19cd0eed5b1.jpg', description: 'Главная станция города с развитой инфраструктурой' },
+  { id: 2, name: 'Шарташ', angle: 36, distance: 38, image: 'https://cdn.poehali.dev/projects/558d902a-9ea9-4b4a-bb10-b9d122cf9d26/files/f3f8a153-d835-411f-831a-206cab7c431c.jpg', description: 'Станция в жилом районе рядом с озером' },
+  { id: 3, name: 'Керамик', angle: 72, distance: 42, image: 'https://cdn.poehali.dev/projects/558d902a-9ea9-4b4a-bb10-b9d122cf9d26/files/1153edc2-bb2b-44b4-b688-fc9242860970.jpg', description: 'Современная станция в промышленной зоне' },
+  { id: 4, name: 'Первомайская', angle: 108, distance: 38, image: 'https://cdn.poehali.dev/projects/558d902a-9ea9-4b4a-bb10-b9d122cf9d26/files/52b3c68e-4c05-49a4-87fb-c19cd0eed5b1.jpg', description: 'Центральная транспортная развязка' },
+  { id: 5, name: 'Медный', angle: 144, distance: 42, image: 'https://cdn.poehali.dev/projects/558d902a-9ea9-4b4a-bb10-b9d122cf9d26/files/f3f8a153-d835-411f-831a-206cab7c431c.jpg', description: 'Тихая станция в спальном районе' },
+  { id: 6, name: 'Калиновская', angle: 180, distance: 38, image: 'https://cdn.poehali.dev/projects/558d902a-9ea9-4b4a-bb10-b9d122cf9d26/files/1153edc2-bb2b-44b4-b688-fc9242860970.jpg', description: 'Станция с удобной парковкой' },
+  { id: 7, name: 'Уралмаш', angle: 216, distance: 42, image: 'https://cdn.poehali.dev/projects/558d902a-9ea9-4b4a-bb10-b9d122cf9d26/files/52b3c68e-4c05-49a4-87fb-c19cd0eed5b1.jpg', description: 'Исторический район с заводами' },
+  { id: 8, name: 'Химмаш', angle: 252, distance: 38, image: 'https://cdn.poehali.dev/projects/558d902a-9ea9-4b4a-bb10-b9d122cf9d26/files/f3f8a153-d835-411f-831a-206cab7c431c.jpg', description: 'Промышленная зона города' },
+  { id: 9, name: 'Елизавет', angle: 288, distance: 42, image: 'https://cdn.poehali.dev/projects/558d902a-9ea9-4b4a-bb10-b9d122cf9d26/files/1153edc2-bb2b-44b4-b688-fc9242860970.jpg', description: 'Старинная часть Екатеринбурга' },
+  { id: 10, name: 'Компрессорный', angle: 324, distance: 38, image: 'https://cdn.poehali.dev/projects/558d902a-9ea9-4b4a-bb10-b9d122cf9d26/files/52b3c68e-4c05-49a4-87fb-c19cd0eed5b1.jpg', description: 'Новая станция с парком' }
 ];
 
 const scheduleData = [
@@ -207,25 +207,35 @@ const Index = () => {
 
               <div>
                 <h3 className="text-2xl font-bold mb-4">Станции маршрута</h3>
-                <div className="space-y-3">
+                <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2">
                   {stations.map((station) => (
                     <Card
                       key={station.id}
-                      className={`p-4 cursor-pointer transition-all hover:shadow-md ${
+                      className={`cursor-pointer transition-all hover:shadow-md overflow-hidden ${
                         selectedStation === station.id ? 'border-primary border-2 bg-primary/5' : ''
                       }`}
                       onClick={() => setSelectedStation(station.id)}
                     >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
-                            selectedStation === station.id ? 'bg-primary text-white' : 'bg-slate-100 text-slate-700'
-                          }`}>
-                            {station.id}
+                      <div className="flex gap-4">
+                        <img 
+                          src={station.image} 
+                          alt={station.name}
+                          className="w-24 h-24 object-cover flex-shrink-0"
+                        />
+                        <div className="flex-1 p-4 flex items-center justify-between">
+                          <div className="flex items-start gap-3">
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold flex-shrink-0 ${
+                              selectedStation === station.id ? 'bg-primary text-white' : 'bg-slate-100 text-slate-700'
+                            }`}>
+                              {station.id}
+                            </div>
+                            <div>
+                              <div className="font-medium mb-1">{station.name}</div>
+                              <p className="text-sm text-slate-600">{station.description}</p>
+                            </div>
                           </div>
-                          <span className="font-medium">{station.name}</span>
+                          <Icon name="ChevronRight" size={20} className="text-slate-400 flex-shrink-0" />
                         </div>
-                        <Icon name="ChevronRight" size={20} className="text-slate-400" />
                       </div>
                     </Card>
                   ))}
